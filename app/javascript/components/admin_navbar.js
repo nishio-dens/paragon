@@ -15,7 +15,18 @@ export default class AdminNavbar extends React.Component {
         </Navbar.Header>
         <Navbar.Collapse>
           <Nav>
-            <NavItem eventKey={1} onClick={ _ => Turbolinks.visit("/products") }>Products</NavItem>
+            <NavItem
+              eventKey={1}
+              href="/inventories"
+              onClick={ _ => Turbolinks.visit("/inventories") }>Inventories
+            </NavItem>
+          </Nav>
+          <Nav>
+            <NavItem
+              eventKey={1}
+              href="/products"
+              onClick={ _ => Turbolinks.visit("/products") }>Products
+            </NavItem>
           </Nav>
           <Nav pullRight>
             <NavItem href="#">Logout</NavItem>

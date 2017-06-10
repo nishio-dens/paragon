@@ -12,6 +12,12 @@
   </head>
 
   <body>
-    <%= yield %>
+    <div id="admin-navbar-component"></div>
+
+    <div class="container-fluid">
+      <%= yield %>
+    </div>
+
+    <%= javascript_pack_tag "admin_navbar" %>
   </body>
 </html>

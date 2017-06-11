@@ -29,13 +29,13 @@ ActiveRecord::Schema.define(version: 0) do
 
   create_table "product_variants", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT" do |t|
     t.integer "product_id", null: false
+    t.boolean "is_master", default: false, null: false
     t.string "sku", null: false
     t.string "name", default: "", null: false
     t.decimal "price", precision: 8, scale: 2, null: false
     t.integer "tax_id", null: false
     t.datetime "available_on"
     t.datetime "image"
-    t.boolean "is_master", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["product_id"], name: "product_variants_product_id_fk"
@@ -51,6 +51,7 @@ ActiveRecord::Schema.define(version: 0) do
   end
 
   create_table "taxes", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT" do |t|
+    t.integer "tax_rate", null: false
     t.string "name", null: false
     t.string "description", null: false
     t.boolean "is_default", null: false

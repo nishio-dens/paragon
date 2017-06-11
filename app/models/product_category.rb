@@ -10,4 +10,7 @@
 #
 
 class ProductCategory < ApplicationRecord
+  # Relations
+  belongs_to :product
+  belongs_to :category
 end

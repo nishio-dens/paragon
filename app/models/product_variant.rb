@@ -16,4 +16,12 @@
 #
 
 class ProductVariant < ApplicationRecord
+  # Relations
+  belongs_to :product
+  belongs_to :tax
+
+  # Validations
+  validates :sku, presence: true, length: { maximum: 255 }
+  validates :name, length: { maximum: 255 }
+  validates :price, presence: true
 end

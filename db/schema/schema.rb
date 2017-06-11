@@ -11,13 +11,13 @@ end
 create_table :product_variants do |t|
   t.int :id, primary_key: true, extra: :auto_increment
   t.int :product_id
+  t.boolean :is_master, default: false
   t.varchar :sku
   t.varchar :name, default: ""
   t.decimal :price, precision: 8, scale: 2
   t.int :tax_id
   t.datetime :available_on, null: true
   t.datetime :image, null: true
-  t.boolean :is_master, default: false
 
   t.datetime :created_at
   t.datetime :updated_at
@@ -48,6 +48,7 @@ end
 
 create_table :taxes do |t|
   t.int :id, primary_key: true, extra: :auto_increment
+  t.int :tax_rate
   t.varchar :name
   t.varchar :description
   t.boolean :is_default

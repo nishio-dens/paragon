@@ -13,6 +13,7 @@ module Paragon
     config.time_zone = 'Tokyo'
 
     config.autoload_paths += Dir["#{config.root}/services"]
+    config.assets.paths << config.root.join("node_modules")
 
     config.generators do |g|
       g.helper false

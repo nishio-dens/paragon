@@ -3,14 +3,15 @@ import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 
 import AppStore from '../store/app_store'
-import AdminNavbar from '../components/admin_navbar'
+import ProductsIndex from '../features/products'
 
 document.addEventListener('turbolinks:load', () => {
-  const node = document.getElementById('admin-navbar-component')
+  const node = document.getElementById('products-index-component')
+  console.log(node)
   if (node) {
     ReactDOM.render(
       <Provider store={AppStore}>
-        <AdminNavbar />
+        <ProductsIndex />
       </Provider>,
       node,
     )

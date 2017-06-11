@@ -1,4 +1,4 @@
-create_table :products do |t|
+create_table :products, auto_increment: 100_000 do |t|
   t.int :id, primary_key: true, extra: :auto_increment
   t.varchar :name
   t.text :description, null: true
@@ -8,7 +8,7 @@ create_table :products do |t|
   t.datetime :updated_at
 end
 
-create_table :product_variants do |t|
+create_table :product_variants, auto_increment: 5_000_000 do |t|
   t.int :id, primary_key: true, extra: :auto_increment
   t.int :product_id
   t.boolean :is_master, default: false

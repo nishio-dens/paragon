@@ -1,3 +1,7 @@
+json.set!(:page, @page)
+json.set!(:per, @per)
+json.set!(:total_count, @variants.total_count)
+
 json.product_variants do
   json.array!(@variants) do |variant|
     json.(variant,

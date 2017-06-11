@@ -7,7 +7,6 @@ import ProductsIndex from '../features/products'
 
 document.addEventListener('turbolinks:load', () => {
   const node = document.getElementById('products-index-component')
-  console.log(node)
   if (node) {
     ReactDOM.render(
       <Provider store={AppStore}>

@@ -24,4 +24,9 @@ class ProductVariant < ApplicationRecord
   validates :sku, presence: true, length: { maximum: 255 }
   validates :name, length: { maximum: 255 }
   validates :price, presence: true
+
+  # Delegates
+  delegate :name, to: :product, prefix: :product
+  delegate :description, to: :product, prefix: :product
+  delegate :keywords, to: :product, prefix: :product
 end

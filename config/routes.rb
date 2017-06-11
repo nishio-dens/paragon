@@ -3,4 +3,8 @@ Rails.application.routes.draw do
 
   resources :inventories
   resources :products
+
+  namespace :api, defaults: { format: :json } do
+    resources :product_variants
+  end
 end

@@ -3,6 +3,12 @@ import DatePicker from 'react-datepicker'
 import moment from 'moment'
 
 import ProductRow from './components/product_row'
+import {
+  SearchTable,
+  SearchTableHeader,
+  SearchHeaderColumn,
+  SearchTableBody
+} from '../../lib/search_tables'
 
 export default class ProductsIndex extends React.Component {
   constructor(props) {
@@ -54,52 +60,41 @@ export default class ProductsIndex extends React.Component {
           </div>
         </div>
 
-        <table className="table table-condensed table-responsive search-table">
-          <thead>
-          <tr>
-            <th>ID</th>
-            <th>ProductID</th>
-            <th>SKU</th>
-            <th>Product Name</th>
-            <th>Variant Name</th>
-            <th>Price</th>
-            <th>Available On</th>
-            <th>Created At</th>
-            <th>Updated At</th>
-          </tr>
-          <tr>
-            <th><input className="form-control input-sm" /></th>
-            <th><input className="form-control input-sm" /></th>
-            <th><input className="form-control input-sm" /></th>
-            <th><input className="form-control input-sm" /></th>
-            <th><input className="form-control input-sm" /></th>
-            <th><input className="form-control input-sm" /></th>
-            <th><input className="form-control input-sm" /></th>
-            <th>
-              <div className="form-inline">
-              <div className="form-group">
-                <DatePicker
-                  dateFormat="YYYY/MM/DD"
-                  selected={this.state.startDate}
-                  onChange={this.handleChange} />
-                <DatePicker />
-              </div>
-              </div>
-            </th>
-            <th>
-              <div className="form-inline">
-              <div className="form-group">
-                <DatePicker />
-                <DatePicker />
-              </div>
-              </div>
-            </th>
-          </tr>
-          </thead>
-          <tbody>
+        <SearchTable>
+          <SearchTableHeader>
+            <SearchHeaderColumn attrName="id">
+              ID
+            </SearchHeaderColumn>
+            <SearchHeaderColumn attrName="product_id">
+              ProductID
+            </SearchHeaderColumn>
+            <SearchHeaderColumn attrName="sku">
+              SKU
+            </SearchHeaderColumn>
+            <SearchHeaderColumn attrName="product_name">
+              Product Name
+            </SearchHeaderColumn>
+            <SearchHeaderColumn attrName="variant_name">
+              Variant Name
+            </SearchHeaderColumn>
+            <SearchHeaderColumn attrName="price">
+              Price
+            </SearchHeaderColumn>
+            <SearchHeaderColumn attrName="available_on">
+              Available On
+            </SearchHeaderColumn>
+            <SearchHeaderColumn attrName="created_at">
+              Created At
+            </SearchHeaderColumn>
+            <SearchHeaderColumn attrName="updated_at">
+              Updated At
+            </SearchHeaderColumn>
+          </SearchTableHeader>
+
+          <SearchTableBody>
             {rowComponents}
-          </tbody>
-        </table>
+          </SearchTableBody>
+        </SearchTable>
       </div>
     )
   }

@@ -1,6 +1,51 @@
+body {
+  font-family: ""Helvetica Neue", Helvetica, Arial, sans-serif";
+}
+
+.main-container {
+  padding-bottom: 20px;
+}
+
 .navbar {
   border-radius: 0;
   margin-bottom: 10px;
+}
+
+.admin-navbar {
+  color: white;
+  font-size: 14px;
+  background-color: #353331;
+  width: 100%;
+
+  .navbar-brand {
+    color: white;
+  }
+
+  .nav > li > a {
+    color: white;
+  }
+
+  .nav > li > a:hover {
+    background-image: linear-gradient(to bottom, #b9090b, #b9090b);
+  }
+
+  .nav > li > .active {
+    background-image: linear-gradient(to bottom, #b9090b, #b9090b) !important;
+  }
+}
+
+.admin-footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 30px;
+  text-align: center;
+  color: white;
+  background-color: #353331;
+
+  .text-muted {
+    padding-top: 5px;
+  }
 }
 
 .search-table {
@@ -15,3 +60,4 @@
     }
   }
 }
+

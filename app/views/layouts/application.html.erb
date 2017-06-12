@@ -18,9 +18,18 @@
   <body>
     <div id="admin-navbar-component"></div>
 
-    <div class="container-fluid">
+    <div class="container-fluid main-container">
       <%= yield %>
     </div>
+
+    <footer class="admin-footer">
+      <div class="container">
+        <p class="text-muted">
+          Paragon - Inventory and Sales Management System
+          Version. <%= Time.current %> <%# FIXME add git revision %>
+        </p>
+      </div>
+    </footer>
 
     <%= render "shared/app_react_components" %>
   </body>

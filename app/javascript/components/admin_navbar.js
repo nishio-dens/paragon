@@ -6,7 +6,7 @@ import NavItem from 'react-bootstrap/lib/NavItem'
 export default class AdminNavbar extends React.Component {
   render () {
     return (
-      <Navbar inverse fluid collapseOnSelect>
+      <Navbar inverse fluid collapseOnSelect className="admin-navbar">
         <Navbar.Header>
           <Navbar.Brand>
             <a href="/">Paragon</a>

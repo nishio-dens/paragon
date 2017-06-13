@@ -1,39 +1,63 @@
 import React from 'react'
 
 export default class SearchTable extends React.Component {
+  searchTableChildren() {
+    return React.Children.toArray(this.props.children)
+  }
+
+  headerComponent() {
+    const children = this.searchTableChildren()
+    const header = children.find(v => v.type.name == "SearchTableHeader")
+
+    if (header) {
+      const columns = header.props.children;
+      const needSearchColumns = columns
+        .map(v => v.props.searchable)
+        .some(v => v == true)
+
+      if (needSearchColumns) {
+        return (
+          <thead>
+          <tr>{columns}</tr>
+          <tr>{columns}</tr>
+          </thead>
+        )
+      } else {
+        return (
+          <thead>
+          <tr>{columns}</tr>
+          </thead>
+        )
+      }
+    } else {
+      return null
+    }
+  }
+
+  bodyComponent() {
+    const children = this.searchTableChildren()
+    const body = children.find(v => v.type.name == "SearchTableBody")
+
+    if (body) {
+      return (
+        <tbody>
+          {body.props.children}
+        </tbody>
+      )
+    } else {
+      return null
+    }
+  }
+
   render () {
-    const tableHeader = this.props.children.find(v => v.type.name == "SearchTableHeader")
-    const tableBody = this.props.children.find(v => v.type.name == "SearchTableBody")
+    const tableHeader = this.headerComponent()
+    const tableBody = this.bodyComponent()
 
     return (
-      <table className="table table-condensed table-responsive search-table">
-        <thead>
-        <tr>
-          <th>ID</th>
-          <th>ProductID</th>
-          <th>SKU</th>
-          <th>Product Name</th>
-          <th>Variant Name</th>
-          <th>Price</th>
-          <th>Available On</th>
-          <th>Created At</th>
-          <th>Updated At</th>
-        </tr>
-        <tr>
-          <th><input className="form-control input-sm" /></th>
-          <th><input className="form-control input-sm" /></th>
-          <th><input className="form-control input-sm" /></th>
-          <th><input className="form-control input-sm" /></th>
-          <th><input className="form-control input-sm" /></th>
-          <th><input className="form-control input-sm" /></th>
-          <th></th>
-          <th></th>
-          <th></th>
-        </tr>
-        </thead>
-        <tbody>
-        {tableBody.props.children}
-        </tbody>
+      <table className={this.props.className}>
+        {tableHeader}
+
+        {tableBody}
       </table>
     )
   }

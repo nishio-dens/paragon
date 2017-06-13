@@ -60,9 +60,9 @@ export default class ProductsIndex extends React.Component {
           </div>
         </div>
 
-        <SearchTable>
+        <SearchTable className="table table-condensed table-responsive search-table">
           <SearchTableHeader>
-            <SearchHeaderColumn attrName="id">
+            <SearchHeaderColumn attrName="id" searchable>
               ID
             </SearchHeaderColumn>
             <SearchHeaderColumn attrName="product_id">

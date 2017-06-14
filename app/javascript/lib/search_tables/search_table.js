@@ -1,5 +1,8 @@
 import React from 'react'
 
+import TextFilter from './filters/text_filter'
+import SelectFilter from './filters/select_filter'
+
 export default class SearchTable extends React.Component {
   searchTableChildren() {
     return React.Children.toArray(this.props.children)
@@ -36,18 +39,18 @@ export default class SearchTable extends React.Component {
   }
 
   filterComponents(columns) {
-    return columns.map(v => {
+    return columns.map((v, i)=> {
       if (v.props.filter) {
         switch (v.props.filter.type) {
           case 'text':
-            return (<th>Text</th>)
+            return (<TextFilter key={i} {...v.props} />)
           case 'select':
-            return (<th>Select</th>)
+            return (<SelectFilter key={i} {...v.props} />)
           default:
-            return (<th></th>)
+            return (<th key={i}></th>)
         }
       } else {
-        return (<th></th>)
+        return (<th key={i}></th>)
       }
     })
   }

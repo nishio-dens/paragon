@@ -62,13 +62,13 @@ export default class ProductsIndex extends React.Component {
 
         <SearchTable className="table table-condensed table-responsive search-table">
           <SearchTableHeader>
-            <SearchHeaderColumn attrName="id" searchable>
+            <SearchHeaderColumn attrName="id" filter={{ type: 'text', defaultValue: "a" }}>
               ID
             </SearchHeaderColumn>
-            <SearchHeaderColumn attrName="product_id">
+            <SearchHeaderColumn attrName="product_id" filter={{ type: 'text' }}>
               ProductID
             </SearchHeaderColumn>
-            <SearchHeaderColumn attrName="sku">
+            <SearchHeaderColumn attrName="sku" filter={{ type: 'select' }}>
               SKU
             </SearchHeaderColumn>
             <SearchHeaderColumn attrName="product_name">

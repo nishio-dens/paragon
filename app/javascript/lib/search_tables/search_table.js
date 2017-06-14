@@ -12,14 +12,15 @@ export default class SearchTable extends React.Component {
     if (header) {
       const columns = header.props.children;
       const needSearchColumns = columns
-        .map(v => v.props.searchable)
-        .some(v => v == true)
+        .map(v => v.props.filter)
+        .some(v => v)
 
       if (needSearchColumns) {
+        const filterColumns = this.filterComponents(columns)
         return (
           <thead>
           <tr>{columns}</tr>
-          <tr>{columns}</tr>
+          <tr>{filterColumns}</tr>
           </thead>
         )
       } else {
@@ -32,6 +33,23 @@ export default class SearchTable extends React.Component {
     } else {
       return null
     }
+  }
+
+  filterComponents(columns) {
+    return columns.map(v => {
+      if (v.props.filter) {
+        switch (v.props.filter.type) {
+          case 'text':
+            return (<th>Text</th>)
+          case 'select':
+            return (<th>Select</th>)
+          default:
+            return (<th></th>)
+        }
+      } else {
+        return (<th></th>)
+      }
+    })
   }
 
   bodyComponent() {

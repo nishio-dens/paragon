@@ -6,6 +6,13 @@ export default class SortableColumn extends BaseColumn {
   applyChange(_) {
   }
 
+  currentCondition() {
+    return {
+      attrName: this.props.attrName,
+      value: { sort: '' }
+    }
+  }
+
   render () {
     return (
       <th>

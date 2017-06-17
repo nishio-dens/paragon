@@ -7,6 +7,10 @@ export default class BaseColumn extends React.Component {
 
   currentCondition() {
     // Not Yet Implemented
+    return {
+      attrName: this.props.attrName,
+      value: ""
+    }
   }
 
   render() {

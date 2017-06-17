@@ -7,6 +7,23 @@ import TextFilter from './filters/text_filter'
 import SelectFilter from './filters/select_filter'
 
 export default class SearchTable extends React.Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      currentCondition: {}
+    }
+
+    this.changeColumnCondition = this.changeColumnCondition.bind(this)
+    this.changeFilterCondition = this.changeFilterCondition.bind(this)
+  }
+
+  componentDidMount() {
+    this.setState({
+      currentCondition: this.searchConditions()
+    })
+  }
+
   searchTableChildren() {
     return React.Children.toArray(this.props.children)
   }
@@ -43,19 +60,21 @@ export default class SearchTable extends React.Component {
   }
 
   columnsComponent(columns) {
+    const onChange = this.changeColumnCondition
+
     return columns.map((v, i) => {
       if (v.props.column) {
         const refName = `column_${v.props.attrName}`
         switch (v.props.column.type) {
           case 'simple':
             return (
-              <SimpleColumn {...v.props} key={i} ref={refName}>
+              <SimpleColumn key={i} ref={refName} notifyChangeToParent={onChange} {...v.props}>
                 {v.props.children}
               </SimpleColumn>
             )
           case 'sortable':
             return (
-              <SortableColumn {...v.props} key={i} ref={refName}>
+              <SortableColumn key={i} ref={refName} notifyChangeToParent={onChange} {...v.props} >
                 {v.props.children}
               </SortableColumn>
             )
@@ -69,7 +88,7 @@ export default class SearchTable extends React.Component {
   }
 
   filterComponents(columns) {
-    const onChange = this.props.onChange
+    const onChange = this.changeFilterCondition
 
     return columns.map((v, i)=> {
       if (v.props.filter) {
@@ -88,6 +107,21 @@ export default class SearchTable extends React.Component {
     })
   }
 
+  bodyComponent() {
+    const children = this.searchTableChildren()
+    const body = children.find(v => v.type.name == "SearchTableBody")
+
+    if (body) {
+      return (
+        <tbody>
+          {body.props.children}
+        </tbody>
+      )
+    } else {
+      return null
+    }
+  }
+
   applySearchConditions(conditions) {
     let that = this
     Object.keys(conditions).forEach(key => {
@@ -104,19 +138,39 @@ export default class SearchTable extends React.Component {
     })
   }
 
-  bodyComponent() {
-    const children = this.searchTableChildren()
-    const body = children.find(v => v.type.name == "SearchTableBody")
+  searchConditions() {
+    let conditions = {}
+    let that = this
+    Object.keys(this.refs).forEach(key => {
+      if (key.startsWith("column_")) {
+        const cond = that.refs[key].currentCondition()
 
-    if (body) {
-      return (
-        <tbody>
-          {body.props.children}
-        </tbody>
-      )
-    } else {
-      return null
-    }
+        if (!conditions[cond.attrName]) { conditions[cond.attrName] = {} }
+        conditions[cond.attrName]['column'] = cond
+      } else if (key.startsWith("filter_")) {
+        const cond = that.refs[key].currentCondition()
+
+        if (!conditions[cond.attrName]) { conditions[cond.attrName] = {} }
+        conditions[cond.attrName]['filter'] = cond
+      }
+    })
+    return conditions
+  }
+
+  changeColumnCondition(value) {
+    let cond = this.state.currentCondition
+    cond[value.attrName]['column'] = value
+
+    this.setState({currentCondition: cond})
+    this.props.onChange(cond)
+  }
+
+  changeFilterCondition(value) {
+    let cond = this.state.currentCondition
+    cond[value.attrName]['filter'] = value
+
+    this.setState({currentCondition: cond})
+    this.props.onChange(cond)
   }
 
   render () {

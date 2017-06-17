@@ -7,6 +7,13 @@ export default class SelectFilter extends BaseFilter {
     console.log("Not Implemented Yet " + value)
   }
 
+  currentCondition() {
+    return {
+      attrName: this.props.attrName,
+      value: "" // Not Implemented Yet
+    }
+  }
+
   render() {
     const { defaultValue } = this.props.filter
     const { attrName } = this.props.attrName

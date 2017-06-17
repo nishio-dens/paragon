@@ -21,14 +21,14 @@ export default class TextFilter extends BaseFilter {
   applyChange(value) {
     this.setState({value: value})
     this.notifyChangeToParent({
-      attribute: this.props.attrName,
+      attrName: this.props.attrName,
       value: value
     })
   }
 
   currentCondition() {
     return {
-      attribute: this.props.attrName,
+      attrName: this.props.attrName,
       value: this.state.value
     }
   }

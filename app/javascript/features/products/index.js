@@ -33,7 +33,7 @@ export default class ProductsIndex extends React.Component {
   resetSearchCondition() {
     const conditions = {
       id: {
-        column: { sort: 'asc' },
+        column: { value: 'asc' },
         filter: { value: '' }
       },
       product_id: {

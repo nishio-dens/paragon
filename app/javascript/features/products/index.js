@@ -17,6 +17,7 @@ export default class ProductsIndex extends React.Component {
       startDate: ""
     }
     this.handleChange = this.handleChange.bind(this)
+    this.resetSearchCondition = this.resetSearchCondition.bind(this)
   }
 
   handleChange(date) {
@@ -27,6 +28,40 @@ export default class ProductsIndex extends React.Component {
 
   handleSearch(changedValue) {
     console.log(changedValue)
+  }
+
+  resetSearchCondition() {
+    const conditions = {
+      id: {
+        column: { sort: 'asc' },
+        filter: { value: '' }
+      },
+      product_id: {
+        filter: { value: '' }
+      },
+      sku: {
+        filter: { value: ''}
+      },
+      product_name: {
+        filter: { value: ''}
+      },
+      variant_name: {
+        filter: { value: ''}
+      },
+      price: {
+        filter: { value: ''}
+      },
+      available_on: {
+        filter: { value: ''}
+      },
+      created_at: {
+        filter: { value: ''}
+      },
+      updated_at: {
+        filter: { value: ''}
+      },
+    }
+    this.refs.searchTable.applySearchConditions(conditions)
   }
 
   render() {
@@ -60,14 +95,16 @@ export default class ProductsIndex extends React.Component {
       <div>
         <div className="row mb-5">
           <div className="col-md-12 text-right">
-            <a href="#" className="btn btn-default">Reset</a>
+            <a onClick={this.resetSearchCondition} className="btn btn-default">Reset</a>
           </div>
         </div>
 
         <SearchTable className="table table-condensed table-responsive search-table"
+                     ref="searchTable"
                      onChange={this.handleSearch}>
           <SearchTableHeader>
             <SearchHeaderColumn attrName="id"
+                                column={{ type: 'sortable', sort: 'desc' }}
                                 filter={{ type: 'text', className: 'form form-control' }}>
               ID
             </SearchHeaderColumn>

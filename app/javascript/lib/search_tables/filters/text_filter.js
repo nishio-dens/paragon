@@ -13,6 +13,10 @@ export default class TextFilter extends React.Component {
 
   onChange(event) {
     const value = event.target.value
+    this.applyChange(value)
+  }
+
+  applyChange(value) {
     this.setState({value: value})
     this.notifyChangeToParent({
       attribute: this.props.attrName,

@@ -39,13 +39,15 @@ export default class SearchTable extends React.Component {
   }
 
   filterComponents(columns) {
+    const onChange = this.props.onChange
+
     return columns.map((v, i)=> {
       if (v.props.filter) {
         switch (v.props.filter.type) {
           case 'text':
-            return (<TextFilter key={i} {...v.props} />)
+            return (<TextFilter key={i} notifyChangeToParent={onChange} {...v.props} />)
           case 'select':
-            return (<SelectFilter key={i} {...v.props} />)
+            return (<SelectFilter key={i} notifyChangeToParent={onChange} {...v.props} />)
           default:
             return (<th key={i}></th>)
         }

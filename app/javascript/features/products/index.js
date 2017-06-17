@@ -25,6 +25,10 @@ export default class ProductsIndex extends React.Component {
     })
   }
 
+  handleSearch(changedValue) {
+    console.log(changedValue)
+  }
+
   render() {
     const results = [
       {
@@ -60,7 +64,8 @@ export default class ProductsIndex extends React.Component {
           </div>
         </div>
 
-        <SearchTable className="table table-condensed table-responsive search-table">
+        <SearchTable className="table table-condensed table-responsive search-table"
+                     onChange={this.handleSearch}>
           <SearchTableHeader>
             <SearchHeaderColumn attrName="id"
                                 filter={{ type: 'text', className: 'form form-control' }}>

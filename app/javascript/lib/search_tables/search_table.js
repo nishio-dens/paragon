@@ -157,6 +157,10 @@ export default class SearchTable extends React.Component {
     return conditions
   }
 
+  search() {
+    this.props.onChange(this.state.currentCondition)
+  }
+
   changeColumnCondition(value) {
     let cond = this.state.currentCondition
     cond[value.attrName]['column'] = value

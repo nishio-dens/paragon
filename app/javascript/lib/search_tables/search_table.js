@@ -1,7 +1,5 @@
 import React from 'react'
 
-import { SearchHeaderColumn } from './index'
-
 import SimpleColumn from './columns/simple_column'
 import SortableColumn from './columns/sortable_column'
 

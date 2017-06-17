@@ -1,5 +1,4 @@
 import React from 'react'
-import { debounce } from 'lodash'
 
 export default class TextFilter extends React.Component {
   constructor(props) {
@@ -9,8 +8,7 @@ export default class TextFilter extends React.Component {
       value: String(this.props.filter.defaultValue || "")
     }
 
-    const wait = this.props.filter.wait || 300
-    this.notifyChangeToParent = debounce(this.props.notifyChangeToParent, wait)
+    this.notifyChangeToParent = this.props.notifyChangeToParent
   }
 
   onChange(event) {

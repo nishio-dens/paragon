@@ -1,6 +1,8 @@
 import React from 'react'
 
-export default class SelectFilter extends React.Component {
+import BaseFilter from './base_filter'
+
+export default class SelectFilter extends BaseFilter {
   applyChange(value) {
     console.log("Not Implemented Yet " + value)
   }

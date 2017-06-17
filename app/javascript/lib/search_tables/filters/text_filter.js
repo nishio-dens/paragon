@@ -1,6 +1,8 @@
 import React from 'react'
 
-export default class TextFilter extends React.Component {
+import BaseFilter from './base_filter'
+
+export default class TextFilter extends BaseFilter {
   constructor(props) {
     super(props)
 
@@ -22,6 +24,13 @@ export default class TextFilter extends React.Component {
       attribute: this.props.attrName,
       value: value
     })
+  }
+
+  currentCondition() {
+    return {
+      attribute: this.props.attrName,
+      value: this.state.value
+    }
   }
 
   render() {

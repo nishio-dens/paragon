@@ -1,6 +1,8 @@
 import React from 'react'
 
-export default class SortableColumn extends React.Component {
+import BaseColumn from './base_column'
+
+export default class SortableColumn extends BaseColumn {
   applyChange(_) {
   }
 

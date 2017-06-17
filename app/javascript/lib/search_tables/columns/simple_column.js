@@ -1,6 +1,8 @@
 import React from 'react'
 
-export default class SimpleColumn extends React.Component {
+import BaseColumn from './base_column'
+
+export default class SimpleColumn extends BaseColumn {
   applyChange(_) {
   }
 

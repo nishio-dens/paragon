@@ -16,6 +16,7 @@ export default class SearchTable extends React.Component {
 
     this.changeColumnCondition = this.changeColumnCondition.bind(this)
     this.changeFilterCondition = this.changeFilterCondition.bind(this)
+    this.resetOtherColumnCondition = this.resetOtherColumnCondition.bind(this)
   }
 
   componentDidMount() {
@@ -132,10 +133,12 @@ export default class SearchTable extends React.Component {
       const filter = that.refs[`filter_${key}`]
 
       if (column) {
-        column['applyChange'](value['column']['value'])
+        const v = value['column'] ? value['column']['value'] : ""
+        column['applyChange'](v)
       }
-      if (filter) {
-        filter['applyChange'](value['filter']['value'])
+      if (filter && value['filter']) {
+        const v = value['filter'] ? value['filter']['value'] : ""
+        filter['applyChange'](v)
       }
     })
   }
@@ -167,7 +170,21 @@ export default class SearchTable extends React.Component {
     this.props.onChange(this.state.currentCondition)
   }
 
-  changeColumnCondition(value) {
+  resetOtherColumnCondition(withoutId) {
+    let cond = this.state.currentCondition
+    const that = this
+    Object.keys(this.state.currentCondition).forEach(k => {
+      if (cond[k].column && k != withoutId && that.refs[`column_${k}`]) {
+        that.refs[`column_${k}`].applyChange("")
+      }
+    })
+  }
+
+  changeColumnCondition(value, resetOther) {
+    if (resetOther && value.attrName) {
+      this.resetOtherColumnCondition(value.attrName)
+    }
+
     let cond = this.state.currentCondition
     cond[value.attrName]['column'] = value
 

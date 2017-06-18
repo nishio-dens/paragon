@@ -14,25 +14,26 @@ export default class SortableColumn extends BaseColumn {
   }
 
   onClick() {
+    const resetOther = true
     switch(this.state.value) {
       case "asc":
-        this.applyChange("")
+        this.applyChange("", resetOther)
         break
       case "desc":
-        this.applyChange("asc")
+        this.applyChange("asc", resetOther)
         break
       default:
-        this.applyChange("desc")
+        this.applyChange("desc", resetOther)
         break
     }
   }
 
-  applyChange(value) {
+  applyChange(value, resetOther = false) {
     this.setState({value: value})
     this.props.notifyChangeToParent({
       attrName: this.props.attrName,
       value: value
-    })
+    }, resetOther)
   }
 
   currentCondition() {
@@ -46,7 +47,7 @@ export default class SortableColumn extends BaseColumn {
     let currentClass = (this.props.column.className || "") + ` ${this.state.value}`
     return (
       <th className="sortable" onClick={this.onClick}>
-        <div className={currentClass} onClick={this.onClick}>
+        <div className={currentClass}>
           {this.props.children}
         </div>
       </th>

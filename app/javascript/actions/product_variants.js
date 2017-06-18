@@ -1,6 +1,8 @@
 import qs from 'qs'
 import api from '../lib/api'
 
+import { startLoading, stopLoading } from './admin_navbar'
+
 export const PRODUCT_VARIANTS_FETCH_REQUEST = 'PRODUCT_VARIANT_FETCH_REQUEST'
 export const PRODUCT_VARIANTS_FETCH_SUCCESS = 'PRODUCT_VARIANT_FETCH_SUCCESS'
 export const PRODUCT_VARIANTS_FETCH_FAIL  = 'PRODUCT_VARIANT_FETCH_FAIL'
@@ -61,9 +63,16 @@ export function fetchProductVariants(page = 1, per = 30, searchConditions = {}) 
     })
     let params = qs.stringify({ page: page, per: per, q: q, s: s})
     dispatch(fetchProductVariantsRequest())
+    dispatch(startLoading())
     api(getState)
       .get(`/api/product_variants?${params}`)
-      .then(response => dispatch(fetchProductVariantsSuccess(response.data)))
-      .catch(error => dispatch(fetchProductVariantsFail(error)))
+      .then(response => {
+        dispatch(fetchProductVariantsSuccess(response.data))
+        dispatch(stopLoading())
+      })
+      .catch(error => {
+        dispatch(fetchProductVariantsFail(error))
+        dispatch(stopLoading())
+      })
   }
 }

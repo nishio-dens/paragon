@@ -2,6 +2,15 @@ body {
   font-family: ""Helvetica Neue", Helvetica, Arial, sans-serif";
 }
 
+@-webkit-keyframes anim {
+  0%   { opacity: 0; }
+  100% { opacity: 1; }
+}
+@keyframes anim　{
+  0%   { opacity: 0; }
+  100% { opacity: 1; }
+}
+
 .hidden {
   display: none;
 }
@@ -44,6 +53,9 @@ body {
       cursor: default;
 
       img {
+        -ms-animation: anim 1s;
+        -webkit-animation: anim 1s;
+        animation: anim 1s;
         padding-top: 7px;
         height: 42px;
       }

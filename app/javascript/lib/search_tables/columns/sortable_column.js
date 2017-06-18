@@ -9,9 +9,30 @@ export default class SortableColumn extends BaseColumn {
     this.state = {
       value: String(this.props.column.defaultValue || "")
     }
+
+    this.onClick = this.onClick.bind(this)
   }
 
-  applyChange(_) {
+  onClick() {
+    switch(this.state.value) {
+      case "asc":
+        this.applyChange("")
+        break
+      case "desc":
+        this.applyChange("asc")
+        break
+      default:
+        this.applyChange("desc")
+        break
+    }
+  }
+
+  applyChange(value) {
+    this.setState({value: value})
+    this.props.notifyChangeToParent({
+      attrName: this.props.attrName,
+      value: value
+    })
   }
 
   currentCondition() {
@@ -24,8 +45,8 @@ export default class SortableColumn extends BaseColumn {
   render () {
     let currentClass = (this.props.column.className || "") + ` ${this.state.value}`
     return (
-      <th className="sortable">
-        <div className={currentClass}>
+      <th className="sortable" onClick={this.onClick}>
+        <div className={currentClass} onClick={this.onClick}>
           {this.props.children}
         </div>
       </th>

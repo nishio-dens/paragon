@@ -31,8 +31,17 @@ const mapDispatchToProps = dispatch => ({
   },
 
   handleSearch(changedValues) {
-    dispatch(fetchProductVariants())
-    console.log(changedValues)
+    let filterConditions = {}
+    Object.keys(changedValues).forEach(k => {
+      const val = changedValues[k]
+      if (val.filter && val.filter.attrName) {
+        filterConditions[val.filter.attrName] = val.filter.value
+      }
+    })
+    dispatch(fetchProductVariants(this.props.page, this.props.per, {
+      filter: filterConditions,
+      order: {}
+    }))
   },
 
   resetSearchCondition() {

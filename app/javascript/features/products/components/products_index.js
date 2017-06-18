@@ -1,6 +1,7 @@
 import React from 'react'
 import DatePicker from 'react-datepicker'
 import moment from 'moment'
+import { debounce } from 'lodash'
 
 import ProductRow from './product_row'
 import {
@@ -16,6 +17,8 @@ export default class ProductsIndex extends React.Component {
 
     this.handleChange = this.props.handleChange.bind(this)
     this.initialSearch = this.props.initialSearch.bind(this)
+    this.handleSearch = this.props.handleSearch.bind(this)
+    this.debounceHandleSearch = debounce(this.handleSearch, 300)
     this.resetSearchCondition = this.props.resetSearchCondition.bind(this)
   }
 
@@ -24,7 +27,7 @@ export default class ProductsIndex extends React.Component {
   }
 
   render() {
-    const { results } = this.props
+    const { page, per, results } = this.props
     const rowComponents = results.map(r => (<ProductRow key={r.id} {...r} />))
 
     return (
@@ -37,7 +40,7 @@ export default class ProductsIndex extends React.Component {
 
         <SearchTable className="table table-condensed table-responsive search-table"
                      ref="searchTable"
-                     onChange={this.props.handleSearch}>
+                     onChange={this.debounceHandleSearch}>
           <SearchTableHeader>
             <SearchHeaderColumn attrName="id"
                                 column={{ type: 'sortable', sort: 'desc' }}

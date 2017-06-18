@@ -43,7 +43,7 @@ export default class ProductsIndex extends React.Component {
                      onChange={this.debounceHandleSearch}>
           <SearchTableHeader>
             <SearchHeaderColumn attrName="id"
-                                column={{ type: 'sortable', sort: 'desc' }}
+                                column={{ type: 'sortable', defaultValue: 'desc' }}
                                 filter={{ type: 'text', className: 'form form-control' }}>
               ID
             </SearchHeaderColumn>

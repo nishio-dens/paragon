@@ -8,12 +8,14 @@ const mapStateToProps = state => {
     return {
       page: state.productVariants.page,
       per: state.productVariants.per,
+      isLoading: state.productVariants.isFetching,
       results: state.productVariants.results.product_variants
     }
   } else {
     return {
       page: 1,
       per: 30,
+      isLoading: true,
       results: []
     }
   }
@@ -27,20 +29,24 @@ const mapDispatchToProps = dispatch => ({
   },
 
   initialSearch() {
-    this.refs.searchTable.search()
+    this.refs.searchTable.initialSearch()
   },
 
   handleSearch(changedValues) {
     let filterConditions = {}
+    let sortConditions = {}
     Object.keys(changedValues).forEach(k => {
       const val = changedValues[k]
       if (val.filter && val.filter.attrName) {
         filterConditions[val.filter.attrName] = val.filter.value
       }
+      if (val.column && val.column.attrName) {
+        sortConditions[val.column.attrName] = val.column.value
+      }
     })
     dispatch(fetchProductVariants(this.props.page, this.props.per, {
       filter: filterConditions,
-      order: {}
+      order: sortConditions
     }))
   },
 

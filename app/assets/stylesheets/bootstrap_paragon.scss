@@ -81,5 +81,12 @@ body {
       }
     }
   }
+
+  .loading {
+    background-color: rgba(0, 0, 0, 0.5) !important;
+    td {
+      border-top: rgba(0, 0, 0, 0.5) !important;
+    }
+  }
 }
 

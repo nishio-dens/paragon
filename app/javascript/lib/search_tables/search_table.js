@@ -112,8 +112,10 @@ export default class SearchTable extends React.Component {
     const body = children.find(v => v.type.name == "SearchTableBody")
 
     if (body) {
+      const className = body.props.className || ""
+
       return (
-        <tbody>
+        <tbody className={className}>
           {body.props.children}
         </tbody>
       )
@@ -155,6 +157,10 @@ export default class SearchTable extends React.Component {
       }
     })
     return conditions
+  }
+
+  initialSearch() {
+    this.props.onChange(this.searchConditions())
   }
 
   search() {

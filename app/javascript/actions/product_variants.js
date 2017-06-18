@@ -47,10 +47,10 @@ export function fetchProductVariants(page = 1, per = 30, searchConditions = {}) 
             q["sku_eq"] = val
             break
           case "product_name":
-            q["product_name_eq"] = val
+            q["product_name_cont"] = val
             break
           case "name":
-            q["name_eq"] = val
+            q["name_cont"] = val
             break
         }
       }

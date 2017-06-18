@@ -54,15 +54,17 @@ export default class ProductsIndex extends React.Component {
             </SearchHeaderColumn>
             <SearchHeaderColumn attrName="sku"
                                 column={{ type: 'sortable' }}
-                                filter={{ type: 'select', className: 'form form-control' }}>
+                                filter={{ type: 'text', className: 'form form-control' }}>
               SKU
             </SearchHeaderColumn>
             <SearchHeaderColumn attrName="product_name"
-                                column={{ type: 'sortable' }}>
+                                column={{ type: 'sortable' }}
+                                filter={{ type: 'text', className: 'form form-control' }}>
               Product Name
             </SearchHeaderColumn>
             <SearchHeaderColumn attrName="name"
-                                column={{ type: 'sortable' }}>
+                                column={{ type: 'sortable' }}
+                                filter={{ type: 'text', className: 'form form-control' }}>
               Variant Name
             </SearchHeaderColumn>
             <SearchHeaderColumn attrName="price"

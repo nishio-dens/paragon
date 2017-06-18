@@ -57,22 +57,28 @@ export default class ProductsIndex extends React.Component {
                                 filter={{ type: 'select', className: 'form form-control' }}>
               SKU
             </SearchHeaderColumn>
-            <SearchHeaderColumn attrName="product_name">
+            <SearchHeaderColumn attrName="product_name"
+                                column={{ type: 'sortable' }}>
               Product Name
             </SearchHeaderColumn>
-            <SearchHeaderColumn attrName="variant_name">
+            <SearchHeaderColumn attrName="name"
+                                column={{ type: 'sortable' }}>
               Variant Name
             </SearchHeaderColumn>
-            <SearchHeaderColumn attrName="price">
+            <SearchHeaderColumn attrName="price"
+                                column={{ type: 'sortable' }}>
               Price
             </SearchHeaderColumn>
-            <SearchHeaderColumn attrName="available_on">
+            <SearchHeaderColumn attrName="available_on"
+                                column={{ type: 'sortable' }}>
               Available On
             </SearchHeaderColumn>
-            <SearchHeaderColumn attrName="created_at">
+            <SearchHeaderColumn attrName="created_at"
+                                column={{ type: 'sortable' }}>
               Created At
             </SearchHeaderColumn>
-            <SearchHeaderColumn attrName="updated_at">
+            <SearchHeaderColumn attrName="updated_at"
+                                column={{ type: 'sortable' }}>
               Updated At
             </SearchHeaderColumn>
           </SearchTableHeader>

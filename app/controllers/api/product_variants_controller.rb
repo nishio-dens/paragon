@@ -7,18 +7,20 @@ class Api::ProductVariantsController < ApplicationController
     created_at_gteq created_at_lteq updated_at_gteq updated_at_lteq
   )
   SORT_ACCEPTABLE_ATTRIBUTES = %i(
-    id product_id sku product_name price available_on created_at updated_at
+    id product_id sku product_name name price available_on created_at updated_at
   )
 
   def index
     @page = current_page
     @per = page_per
-    @variants = ProductVariant
-                  .preload(:product)
-                  .all
-                  .ransack(searchable_params[:q])
+    search = ProductVariant
+               .joins(:product)
+               .preload(:product)
+               .all
+               .ransack(searchable_params[:q])
+    search.sorts = order_params if order_params.present?
+    @variants = search
                   .result
-                  .order(order_params[:s])
                   .page(@page)
                   .per(@per)
   end
@@ -30,6 +32,9 @@ class Api::ProductVariantsController < ApplicationController
   end
 
   def order_params
-    params.permit(s: SORT_ACCEPTABLE_ATTRIBUTES).to_h
+    @_order_params ||=
+      if params[:s].present?
+        params[:s].permit(SORT_ACCEPTABLE_ATTRIBUTES).to_h.map { |k, v| "#{k} #{v}" }
+      end
   end
 end

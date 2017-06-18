@@ -6,7 +6,14 @@ import NavItem from 'react-bootstrap/lib/NavItem'
 export default class AdminNavbar extends React.Component {
   render () {
     const loadingIconPath = this.props.assets.loadingIcon
-    const nowLoading = this.props.nowLoading ? "loading" : "hidden"
+    let loadingIcon = null
+    if (this.props.nowLoading) {
+      loadingIcon = (
+        <NavItem href="#" className="loading">
+          <img src={loadingIconPath}></img>
+        </NavItem>
+      )
+    }
 
     return (
       <Navbar inverse fluid collapseOnSelect className="admin-navbar">
@@ -32,9 +39,7 @@ export default class AdminNavbar extends React.Component {
             </NavItem>
           </Nav>
           <Nav pullRight>
-            <NavItem href="#" className={nowLoading}>
-              <img src={loadingIconPath}></img>
-            </NavItem>
+            {loadingIcon}
             <NavItem href="#">Logout</NavItem>
           </Nav>
         </Navbar.Collapse>

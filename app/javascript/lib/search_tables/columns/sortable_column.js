@@ -15,8 +15,10 @@ export default class SortableColumn extends BaseColumn {
 
   render () {
     return (
-      <th>
-        {this.props.children}
+      <th className="sortable">
+        <div className="both desc">
+          {this.props.children}
+        </div>
       </th>
     )
   }

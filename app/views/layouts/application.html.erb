@@ -31,6 +31,15 @@
       </div>
     </footer>
 
+    <div id="server-side-contents" class="hidden">
+      <%=
+        {
+            assets: {
+                loadingIcon: asset_path(:loading)
+            }
+        }.to_json
+      %>
+    </div>
     <%= render "shared/app_react_components" %>
   </body>
 </html>

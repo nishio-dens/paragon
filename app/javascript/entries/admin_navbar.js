@@ -7,10 +7,12 @@ import AdminNavbar from '../components/admin_navbar'
 
 document.addEventListener('turbolinks:load', () => {
   const node = document.getElementById('admin-navbar-component')
+  const serverNode = document.getElementById('server-side-contents')
+  const serverData = JSON.parse(serverNode.innerText)
   if (node) {
     ReactDOM.render(
       <Provider store={AppStore}>
-        <AdminNavbar />
+        <AdminNavbar {...serverData} />
       </Provider>,
       node,
     )

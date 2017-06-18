@@ -2,6 +2,10 @@ body {
   font-family: ""Helvetica Neue", Helvetica, Arial, sans-serif";
 }
 
+.hidden {
+  display: none;
+}
+
 .main-container {
   padding-bottom: 20px;
 }
@@ -31,6 +35,24 @@ body {
 
   .nav > li > .active {
     background-image: linear-gradient(to bottom, #b9090b, #b9090b) !important;
+  }
+
+  .loading {
+    a {
+      padding-top: 0;
+      padding-bottom: 0;
+      cursor: default;
+
+      img {
+        padding-top: 7px;
+        height: 42px;
+      }
+    }
+
+    a:hover {
+      cursor: default;
+      background-image: none !important;
+    }
   }
 }
 

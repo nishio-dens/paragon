@@ -65,6 +65,10 @@ export default class SearchTable extends React.Component {
 
     return columns.map((v, i) => {
       if (v.props.column) {
+        if (!this.isVisible(v.props.attrName)) {
+          return ""
+        }
+
         const refName = `column_${v.props.attrName}`
         switch (v.props.column.type) {
           case 'simple':
@@ -93,6 +97,10 @@ export default class SearchTable extends React.Component {
 
     return columns.map((v, i)=> {
       if (v.props.filter) {
+        if (!this.isVisible(v.props.attrName)) {
+          return ""
+        }
+
         const refName = `filter_${v.props.attrName}`
         switch (v.props.filter.type) {
           case 'text':
@@ -198,6 +206,13 @@ export default class SearchTable extends React.Component {
 
     this.setState({currentCondition: cond})
     this.props.onChange(cond)
+  }
+
+  isVisible(attrName) {
+    if (!this.props.showColumns) {
+      return true
+    }
+    return this.props.showColumns.indexOf(attrName) >= 0
   }
 
   render () {

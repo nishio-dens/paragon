@@ -1,9 +1,8 @@
 import React from 'react'
-import DatePicker from 'react-datepicker'
-import moment from 'moment'
 import { debounce } from 'lodash'
 
 import ProductRow from './product_row'
+import ShowColumns from '../containers/show_columns_container'
 import {
   SearchTable,
   SearchTableHeader,
@@ -27,19 +26,41 @@ export default class ProductsIndex extends React.Component {
   }
 
   render() {
+    const showColumnsStatuses = [
+      {
+        attrName: "id",
+        displayName: "Id",
+        checked: true
+      }
+    ]
+    const showColumns = [
+      "id",
+      "product_id",
+      "sku",
+      "product_name",
+      "name",
+      "price",
+      "available_on",
+      "created_at",
+      "updated_at"
+    ]
+
     const { page, per, results } = this.props
-    const rowComponents = results.map(r => (<ProductRow key={r.id} {...r} />))
+    const rowComponents = results.map(r => (<ProductRow showColumns={showColumns} key={r.id} {...r} />))
 
     return (
       <div>
         <div className="row mb-5">
           <div className="col-md-12 text-right">
+            <ShowColumns columns={showColumnsStatuses} />
+
             <a onClick={this.resetSearchCondition} className="btn btn-default">Reset</a>
           </div>
         </div>
 
         <SearchTable className="table table-condensed table-responsive search-table"
                      ref="searchTable"
+                     showColumns={showColumns}
                      onChange={this.debounceHandleSearch}>
           <SearchTableHeader>
             <SearchHeaderColumn attrName="id"
@@ -68,19 +89,23 @@ export default class ProductsIndex extends React.Component {
               Variant Name
             </SearchHeaderColumn>
             <SearchHeaderColumn attrName="price"
-                                column={{ type: 'sortable' }}>
+                                column={{ type: 'sortable' }}
+                                filter={{ type: 'none' }}>
               Price
             </SearchHeaderColumn>
             <SearchHeaderColumn attrName="available_on"
-                                column={{ type: 'sortable' }}>
+                                column={{ type: 'sortable' }}
+                                filter={{ type: 'none' }}>
               Available On
             </SearchHeaderColumn>
             <SearchHeaderColumn attrName="created_at"
-                                column={{ type: 'sortable' }}>
+                                column={{ type: 'sortable' }}
+                                filter={{ type: 'none' }}>
               Created At
             </SearchHeaderColumn>
             <SearchHeaderColumn attrName="updated_at"
-                                column={{ type: 'sortable' }}>
+                                column={{ type: 'sortable' }}
+                                filter={{ type: 'none'}}>
               Updated At
             </SearchHeaderColumn>
           </SearchTableHeader>

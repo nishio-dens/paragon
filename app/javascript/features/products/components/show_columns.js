@@ -28,9 +28,9 @@ export default class ShowColumns extends React.Component {
                    key={attrName}
                    onChange={e => this.onChange(key, e.target.checked)}
                    checked={v.checked} />
-            <span className="ml-5">
+            <label className="ml-5">
               {v.displayName}
-              </span>
+            </label>
           </a>
         </li>
       )

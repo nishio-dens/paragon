@@ -17,10 +17,11 @@ export default class SelectFilter extends BaseFilter {
   render() {
     const { defaultValue } = this.props.filter
     const { attrName } = this.props.attrName
+    const { className } = this.props
 
     return (
       <th>
-        <select className="form form-control" value={defaultValue} />
+        <select className={className} value={defaultValue} />
       </th>
     )
   }

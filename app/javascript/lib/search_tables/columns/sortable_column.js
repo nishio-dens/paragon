@@ -44,9 +44,13 @@ export default class SortableColumn extends BaseColumn {
   }
 
   render () {
-    let currentClass = (this.props.column.className || "") + ` ${this.state.value}`
+    let currentClass = "sortable " +
+      (this.props.className) +
+      (this.props.column.className || "") +
+      ` ${this.state.value}`
+
     return (
-      <th className="sortable" onClick={this.onClick}>
+      <th className={currentClass} onClick={this.onClick}>
         <div className={currentClass}>
           {this.props.children}
         </div>

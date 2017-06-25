@@ -8,7 +8,7 @@ export default class SimpleColumn extends BaseColumn {
 
   render () {
     return (
-      <th>
+      <th className={this.props.className || ""}>
         {this.props.children}
       </th>
     )

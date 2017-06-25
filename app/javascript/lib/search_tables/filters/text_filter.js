@@ -7,6 +7,7 @@ export default class TextFilter extends BaseFilter {
     super(props)
 
     this.state = {
+      attrName: this.props.attrName,
       value: String(this.props.filter.defaultValue || "")
     }
 
@@ -35,9 +36,10 @@ export default class TextFilter extends BaseFilter {
 
   render() {
     const { className, placeholder } = this.props.filter
+    let thClassName = this.props.className
 
     return (
-      <th>
+      <th className={thClassName}>
         <input
           className={className}
           value={this.state.value}

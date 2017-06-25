@@ -15,44 +15,25 @@ export default class ProductsIndex extends React.Component {
     super(props)
 
     this.handleChange = this.props.handleChange.bind(this)
-    this.initialSearch = this.props.initialSearch.bind(this)
+    this.initialize = this.props.initialize.bind(this)
     this.handleSearch = this.props.handleSearch.bind(this)
     this.debounceHandleSearch = debounce(this.handleSearch, 300)
     this.resetSearchCondition = this.props.resetSearchCondition.bind(this)
   }
 
   componentDidMount() {
-    this.initialSearch()
+    this.initialize()
   }
 
   render() {
-    const showColumnsStatuses = [
-      {
-        attrName: "id",
-        displayName: "Id",
-        checked: true
-      }
-    ]
-    const showColumns = [
-      "id",
-      "product_id",
-      "sku",
-      "product_name",
-      "name",
-      "price",
-      "available_on",
-      "created_at",
-      "updated_at"
-    ]
-
-    const { page, per, results } = this.props
+    const { page, per, results, columns, showColumns } = this.props
     const rowComponents = results.map(r => (<ProductRow showColumns={showColumns} key={r.id} {...r} />))
 
     return (
       <div>
         <div className="row mb-5">
           <div className="col-md-12 text-right">
-            <ShowColumns columns={showColumnsStatuses} />
+            <ShowColumns columns={columns} showColumns={showColumns} onChange={this.props.onChangeShowHideColumns} />
 
             <a onClick={this.resetSearchCondition} className="btn btn-default">Reset</a>
           </div>
@@ -94,7 +75,7 @@ export default class ProductsIndex extends React.Component {
               Price
             </SearchHeaderColumn>
             <SearchHeaderColumn attrName="available_on"
-                                column={{ type: 'sortable' }}
+                                column={{ type: 'simple' }}
                                 filter={{ type: 'none' }}>
               Available On
             </SearchHeaderColumn>

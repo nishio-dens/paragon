@@ -5,6 +5,7 @@ import SortableColumn from './columns/sortable_column'
 
 import TextFilter from './filters/text_filter'
 import SelectFilter from './filters/select_filter'
+import NoneFilter from './filters/none_filter'
 
 export default class SearchTable extends React.Component {
   constructor(props) {
@@ -65,26 +66,32 @@ export default class SearchTable extends React.Component {
 
     return columns.map((v, i) => {
       if (v.props.column) {
-        if (!this.isVisible(v.props.attrName)) {
-          return ""
-        }
+        let hidden = !this.isVisible(v.props.attrName)
 
         const refName = `column_${v.props.attrName}`
         switch (v.props.column.type) {
-          case 'simple':
-            return (
-              <SimpleColumn key={i} ref={refName} notifyChangeToParent={onChange} {...v.props}>
-                {v.props.children}
-              </SimpleColumn>
-            )
+
           case 'sortable':
-            return (
-              <SortableColumn key={i} ref={refName} notifyChangeToParent={onChange} {...v.props} >
+            return (<SortableColumn
+                key={i}
+                ref={refName}
+                className={hidden ? "hidden" : ""}
+                notifyChangeToParent={onChange}
+                {...v.props} >
                 {v.props.children}
               </SortableColumn>
             )
+          case 'simple':
           default:
-            return (<th key={i}>{v.props.children}</th>)
+            return (<SimpleColumn
+                key={i}
+                ref={refName}
+                className={hidden ? "hidden" : ""}
+                notifyChangeToParent={onChange}
+                {...v.props}>
+                {v.props.children}
+              </SimpleColumn>
+            )
         }
       } else {
         return (<th key={i}>{v.props.children}</th>)
@@ -97,18 +104,30 @@ export default class SearchTable extends React.Component {
 
     return columns.map((v, i)=> {
       if (v.props.filter) {
-        if (!this.isVisible(v.props.attrName)) {
-          return ""
-        }
+        let hidden = !this.isVisible(v.props.attrName)
 
         const refName = `filter_${v.props.attrName}`
         switch (v.props.filter.type) {
           case 'text':
-            return (<TextFilter key={i} ref={refName} notifyChangeToParent={onChange} {...v.props} />)
+            return (<TextFilter
+              key={i}
+              ref={refName}
+              className={hidden ? "hidden" : ""}
+              notifyChangeToParent={onChange} {...v.props}
+            />)
           case 'select':
-            return (<SelectFilter key={i} ref={refName} notifyChangeToParent={onChange} {...v.props} />)
+            return (<SelectFilter
+              key={i}
+              ref={refName}
+              notifyChangeToParent={onChange}
+              className={hidden ? "hidden" : ""}
+              {...v.props}
+            />)
           default:
-            return (<th key={i}></th>)
+            return (<NoneFilter
+              key={i}
+              className={hidden ? "hidden" : ""}
+            />)
         }
       } else {
         return (<th key={i}></th>)

@@ -65,7 +65,7 @@ const mapDispatchToProps = dispatch => ({
       product_name: {
         filter: { value: ''}
       },
-      variant_name: {
+      name: {
         filter: { value: ''}
       },
       price: {
